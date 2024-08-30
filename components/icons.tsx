@@ -29,6 +29,28 @@ export const Logo: React.FC<IconSvgProps> = ({
   </svg>
 );
 
+export const Cart: React.FC<IconSvgProps> = ({
+  size = 36,
+  width,
+  height,
+  ...props
+}) => (
+  <svg
+    fill='none'
+    height={size || height}
+    viewBox='0 0 32 32'
+    width={size || width}
+    {...props}
+  >
+    <path d='M4 5h2l1.6 7.59L8 14h16v-2H8.42L7.3 6H4V5z' fill='currentColor' />
+    <path
+      d='M7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm14 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z'
+      fill='currentColor'
+    />
+    <path d='M10 16h12v2H10v-2z' fill='currentColor' />
+  </svg>
+);
+
 export const DiscordIcon: React.FC<IconSvgProps> = ({
   size = 24,
   width,
