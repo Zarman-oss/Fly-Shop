@@ -46,22 +46,6 @@ export const Navbar = () => {
             <p className='font-bold text-inherit'>Fly Shop</p>
           </NextLink>
         </NavbarBrand>
-        {/* <ul className='hidden lg:flex gap-4 justify-start ml-2'>
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: 'foreground' }),
-                  'data-[active=true]:text-primary data-[active=true]:font-medium'
-                )}
-                color='foreground'
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
-          ))}
-        </ul> */}
       </NavbarContent>
 
       <NavbarContent
@@ -69,8 +53,10 @@ export const Navbar = () => {
         justify='end'
       >
         <NextLink href='/cart'>
-          <NavbarItem className='hidden md:flex'>
-            <Cart />
+          <NavbarItem className='hidden md:flex items-center gap-1'>
+            <Cart className='text-base' />
+            <p className='text-lg'>$0.0</p>
+            <span className='text-sm text-gray-500'>(0)</span>
           </NavbarItem>
         </NextLink>
         <NavbarItem className='hidden sm:flex gap-2'>
@@ -81,7 +67,11 @@ export const Navbar = () => {
 
       <NavbarContent className='sm:hidden basis-1 pl-4' justify='end'>
         <NextLink href='/cart'>
-          <Cart />
+          <div className='flex items-center gap-1'>
+            <Cart className='text-base' />
+            <p className='text-lg'>$0.0</p>
+            <span className='text-sm text-gray-500'>(0)</span>
+          </div>
         </NextLink>
         <ThemeSwitch />
         <NavbarMenuToggle />
