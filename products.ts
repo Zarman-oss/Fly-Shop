@@ -1,32 +1,37 @@
 export const products = [
   {
-    name: 'Stylish Sneakers',
+    name: 'Jordan 6 ',
     price: 79.99,
     currency: 'USD',
-    image: 'https://example.com/images/stylish-sneakers.jpg',
+    image:
+      'https://res.cloudinary.com/zoo-dev/image/upload/v1725398247/shoes_tqfvwg.png',
   },
   {
-    name: 'Casual Backpack',
+    name: 'Bape Book Bag',
     price: 59.99,
     currency: 'USD',
-    image_url: 'https://example.com/images/casual-backpack.jpg',
+    image:
+      'https://res.cloudinary.com/zoo-dev/image/upload/v1725398247/bookbag_sz6uk6.png',
   },
   {
-    name: 'Wireless Headphones',
+    name: 'Black Tee',
     price: 129.99,
     currency: 'USD',
-    image: 'https://example.com/images/wireless-headphones.jpg',
+    image:
+      'https://res.cloudinary.com/zoo-dev/image/upload/v1725398264/black_t_t0jxha.png',
   },
   {
-    name: 'Smart Watch',
+    name: 'Headphones',
     price: 199.99,
     currency: 'USD',
-    image: 'https://example.com/images/smart-watch.jpg',
+    image:
+      'https://res.cloudinary.com/zoo-dev/image/upload/v1725398246/headphones_rbzn0g.png',
   },
   {
-    name: 'Sunglasses',
+    name: 'White Tee',
     price: 49.99,
     currency: 'USD',
-    image: 'https://example.com/images/sunglasses.jpg',
+    image:
+      'https://res.cloudinary.com/zoo-dev/image/upload/v1725398275/white_t_qbaoj7.png',
   },
 ];

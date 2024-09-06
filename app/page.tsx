@@ -1,8 +1,18 @@
-export default function Home() {
+import ProductCard from '@/components/ProductCard';
+import { stripe } from '@/utils/stripe';
+
+export default async function HomePage() {
+  const { data: products } = await stripe.products.list({
+    expand: ['data.default_price'],
+    limit: 8,
+  });
+
   return (
-    <section className='flex flex-col items-center justify-center gap-4 py-8 md:py-10'>
-      <div className='inline-block max-w-xl text-center justify-center'>
-        <h1>Start here...</h1>
+    <section className='container xl:max-w-screen-xl mx-auto py-12 px-6'>
+      <div className='grid gap-8 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1'>
+        {products.map((product, index) => (
+          <ProductCard key={product.id} product={product} index={index} />
+        ))}
       </div>
     </section>
   );
