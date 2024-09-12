@@ -1,10 +1,13 @@
-import { Navbar } from '@/components/navbar';
+import ClientOnlyCartProvider from '@/components/ClientOnlyCartProvider';
+import Navbar from '@/components/Navbar';
 import { fontSans } from '@/config/fonts';
 import { siteConfig } from '@/config/site';
 import '@/styles/globals.css';
 import { Link } from '@nextui-org/link';
 import clsx from 'clsx';
 import { Metadata, Viewport } from 'next';
+import Head from 'next/head';
+import { Toaster } from 'react-hot-toast';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
@@ -32,7 +35,11 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang='en'>
-      <head />
+      <Head>
+        <title>{siteConfig.name}</title>
+        <meta name='description' content={siteConfig.description} />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
       <body
         className={clsx(
           'min-h-screen bg-background font-sans antialiased',
@@ -41,10 +48,14 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-screen'>
-            <Navbar />
-            <main className='container mx-auto max-w-7xl pt-16 px-6 flex-grow'>
-              {children}
-            </main>
+            <ClientOnlyCartProvider>
+              <Toaster />
+              <Navbar />
+              <main className='container mx-auto max-w-7xl pt-16 px-6 flex-grow'>
+                {children}
+              </main>
+            </ClientOnlyCartProvider>
+
             <footer className='w-full flex items-center justify-center py-3'>
               <Link
                 isExternal

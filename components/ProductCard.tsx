@@ -1,51 +1,60 @@
+'use client';
+
 import Rating from '@/components/Rating';
+import { Button } from '@nextui-org/button';
 import Image from 'next/image';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
+import { formatCurrencyString, useShoppingCart } from 'use-shopping-cart';
 
 export default function ProductCard({ product, index }: any) {
-  const imageUrl =
-    product.images && product.images.length > 0
-      ? product.images[0]
-      : '/placeholder.jpg';
-  const price = product.default_price
-    ? (product.default_price.unit_amount / 100).toFixed(2)
-    : 'N/A';
-  const currency = product.default_price
-    ? product.default_price.currency.toUpperCase()
-    : '';
+  const { addItem } = useShoppingCart();
+
+  function onAddToCart(event: any) {
+    event.preventDefault();
+    const id = toast.loading('Adding 1 item..');
+    addItem(product);
+    toast.success(`${product.name} added`, { id });
+  }
 
   return (
-    <Link
-      href={`/products/${product.id}`}
-      className='rounded-md group overflow-hidden'
-    >
-      <div className='relative w-full h-80'>
-        <Image
-          src={imageUrl}
-          alt={product.name}
-          priority={index === 0}
-          sizes='100%'
-          fill
-          style={{
-            objectFit: 'contain',
-          }}
-          className='object-cover'
-          quality={99}
-        />
-      </div>
+    <div className='rounded-md group overflow-hidden'>
+      <Link href={`/products/${product.id}`}>
+        <div className='relative w-full h-80'>
+          <Image
+            src={product.image}
+            alt={product.name}
+            priority={index === 0}
+            sizes='100%'
+            fill
+            style={{
+              objectFit: 'contain',
+            }}
+            className='object-cover'
+            quality={99}
+          />
+        </div>
+      </Link>
+
       <div className='p-6'>
         <p className='font-semibold text-lg'>{product.name}</p>
         <Rating />
         <div className='mt-4 flex items-center justify-between space-x-2'>
-          <div>
-            <p>Price</p>
-            <p className='text-lg font-semibold'>
-              {currency} {price}
-            </p>
-          </div>
-          <button className='border rounded-lg py-1 px-2'>Add to cart</button>
+          <p>Price</p>
+          <p className='text-lg font-semibold'>
+            {formatCurrencyString({
+              currency: product.currency,
+              value: product.price,
+            })}
+          </p>
+        </div>
+
+        <div className='mt-4 flex items-center justify-between space-x-2'>
+          <Button size='sm' onClick={onAddToCart} radius='sm' color='default'>
+            Add to cart
+          </Button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

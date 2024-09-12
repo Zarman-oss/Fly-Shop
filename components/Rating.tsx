@@ -3,7 +3,7 @@ import { StarIcon as EmptyStarIcon } from '@heroicons/react/24/outline';
 
 export default function Rating() {
   return (
-    <div className='flex items-center -ml-1'>
+    <div className='flex items-center -ml-1 mt-2'>
       {Array.from({ length: 4 }).map((_, index) => (
         <StarIcon
           key={index}
