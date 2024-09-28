@@ -24,6 +24,7 @@
     "@react-aria/ssr": "3.9.4",
     "@react-aria/visually-hidden": "3.8.12",
     "@stripe/stripe-js": "^4.4.0",
+    "axios": "^1.7.7",
     "clsx": "2.1.1",
     "framer-motion": "~11.1.9",
     "intl-messageformat": "^10.5.14",
@@ -33,6 +34,7 @@
     "react-dom": "18.3.1",
     "react-hot-toast": "^2.4.1",
     "stripe": "^16.9.0",
+    "swr": "^2.2.5",
     "use-shopping-cart": "^3.2.0"
   },
   "devDependencies": {

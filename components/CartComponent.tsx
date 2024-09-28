@@ -1,10 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { Button } from '@nextui-org/button';
+import { NextResponse } from 'next/server';
+import Link from 'next/link';
+import { useState } from 'react';
 import { useShoppingCart } from 'use-shopping-cart';
 import CartProduct from './CartProduct';
-import { useState } from 'react';
 
 export default function CartComponent() {
   const {
@@ -18,7 +19,7 @@ export default function CartComponent() {
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   async function onCheckout() {
-    if (cartCount > 0) {
+    if (cartCount! > 0) {
       try {
         setIsRedirecting(true);
 
@@ -51,7 +52,7 @@ export default function CartComponent() {
 
   return (
     <div className='container xl:max-w-screen-xl mx-auto py-12 px-6'>
-      {cartCount > 0 ? (
+      {cartCount! > 0 ? (
         <>
           <h2 className='text-4xl font-semibold'>Your shopping cart</h2>
           <p className='mt-1 text-xl'>
@@ -65,7 +66,7 @@ export default function CartComponent() {
           </p>
 
           <div className='mt-12 space-y-4'>
-            {Object.entries(cartDetails).map(([productId, product]) => (
+            {Object.entries(cartDetails!).map(([productId, product]) => (
               <CartProduct key={productId} product={product} />
             ))}
 
