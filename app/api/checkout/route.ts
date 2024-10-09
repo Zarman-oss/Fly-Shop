@@ -1,5 +1,6 @@
 import { stripe } from '@/utils/stripe';
 import { NextResponse } from 'next/server';
+import { Stripe } from 'stripe';
 import { validateCartItems } from 'use-shopping-cart/utilities';
 
 export async function POST(request: Request) {
@@ -13,12 +14,19 @@ export async function POST(request: Request) {
 
     // Map Stripe products to a structure that matches `cartDetails`
     const products = inventory.data.map((product) => {
-      const price = product.default_price;
+      // Make sure the default_price is of type Stripe.Price
+      const price = product.default_price as Stripe.Price;
+
+      // Check if price exists and has unit_amount
+      if (!price || !price.unit_amount) {
+        throw new Error(`Product ${product.id} is missing price information.`);
+      }
+
       return {
         id: product.id, // Stripe product ID
         name: product.name,
-        price: price!.unit_amount, // Price in cents
-        currency: price!.currency,
+        price: price.unit_amount, // Price in cents
+        currency: price.currency,
         image: product.images[0],
       };
     });

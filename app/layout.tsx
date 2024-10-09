@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.svg',
   },
 };
 
@@ -37,9 +37,29 @@ export default function RootLayout({
     <html suppressHydrationWarning lang='en'>
       <Head>
         <title>{siteConfig.name}</title>
+
+        <link
+          rel='apple-touch-icon'
+          sizes='180x180'
+          href='/apple-touch-icon.png'
+        />
+        <link rel='shortcut icon' href='/favicon.ico' />
+
+        <link rel='icon' href='/favicon.svg' type='image/svg+xml' />
+
+        <link
+          rel='icon'
+          type='image/png'
+          href='/favicon-48x48.png'
+          sizes='48x48'
+        />
+
+        <meta name='apple-mobile-web-app-title' content='MyWebSite' />
+        <link rel='manifest' href='/site.webmanifest' />
+
         <meta name='description' content={siteConfig.description} />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
+
       <body
         className={clsx(
           'min-h-screen bg-background font-sans antialiased',

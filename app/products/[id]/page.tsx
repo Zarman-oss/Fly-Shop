@@ -8,8 +8,13 @@ async function getProductData(productId: string) {
 
   const product = inventory.data.find((product) => product.id === productId);
 
-  if (product && product.default_price) {
-    const price = product.default_price;
+  if (
+    product &&
+    product.default_price &&
+    typeof product.default_price === 'object' &&
+    'currency' in product.default_price
+  ) {
+    const price = product.default_price as any;
     return {
       currency: price.currency,
       id: product.id,
@@ -34,7 +39,7 @@ export default async function ProductPage({
 
   return (
     <div className='container mx-auto py-12 px-6 lg:max-w-screen-lg '>
-      <div className='flex flex-col md:flex-row justify-between items-center  space-y-8 md:space-y-0 md:space-x-12'>
+      <div className='flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-12'>
         <ProductPageState product={product} />
       </div>
     </div>

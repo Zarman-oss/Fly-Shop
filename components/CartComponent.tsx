@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@nextui-org/button';
-import { NextResponse } from 'next/server';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useShoppingCart } from 'use-shopping-cart';
@@ -23,7 +22,6 @@ export default function CartComponent() {
       try {
         setIsRedirecting(true);
 
-        // Send the cartDetails in the request body
         const response = await fetch('/api/checkout', {
           method: 'POST',
           headers: {
@@ -39,11 +37,10 @@ export default function CartComponent() {
           );
         }
 
-        const { sessionId } = await response.json(); // Fix: Get 'sessionId' from the response
-        await redirectToCheckout(sessionId); // Fix: Use 'sessionId' for redirection
+        const { sessionId } = await response.json();
+        await redirectToCheckout(sessionId);
       } catch (error) {
         console.error('Error:', error.message);
-        // Handle the error, e.g., show a message to the user
       } finally {
         setIsRedirecting(false);
       }
@@ -51,32 +48,34 @@ export default function CartComponent() {
   }
 
   return (
-    <div className='container xl:max-w-screen-xl mx-auto py-12 px-6'>
+    <div className='container xl:max-w-screen-xl mx-auto py-8 px-4 sm:py-12 sm:px-6'>
       {cartCount! > 0 ? (
         <>
-          <h2 className='text-4xl font-semibold'>Your shopping cart</h2>
-          <p className='mt-1 text-xl'>
+          <h2 className='text-3xl sm:text-4xl font-semibold'>
+            Your shopping cart
+          </h2>
+          <p className='mt-1 text-lg sm:text-xl'>
             {cartCount} {cartCount === 1 ? 'item' : 'items'}
             <button
               onClick={() => clearCart()}
-              className='opacity-50 hover:opacity-100 text-base capitalize ml-2'
+              className='opacity-50 hover:opacity-100 text-sm sm:text-base capitalize ml-2'
             >
               (Clear all)
             </button>
           </p>
 
-          <div className='mt-12 space-y-4'>
+          <div className='mt-8 sm:mt-12 space-y-4'>
             {Object.entries(cartDetails!).map(([productId, product]) => (
               <CartProduct key={productId} product={product} />
             ))}
 
             <div className='flex flex-col items-end py-4 mt-8'>
-              <p className='text-xl'>
+              <p className='text-lg sm:text-xl'>
                 Total:{' '}
                 <span className='font-semibold'>{formattedTotalPrice}</span>
               </p>
               <Button
-                className='mt-4 max-w-max'
+                className='mt-4 w-full sm:max-w-max'
                 color='warning'
                 variant='solid'
                 radius='none'
@@ -90,10 +89,10 @@ export default function CartComponent() {
         </>
       ) : (
         <>
-          <h2 className='text-4xl font-semibold'>
+          <h2 className='text-3xl sm:text-4xl font-semibold'>
             Your shopping cart is empty
           </h2>
-          <p className='mt-1 text-xl'>
+          <p className='mt-1 text-lg sm:text-xl'>
             Check out our awesome products{' '}
             <Link href='/' className='text-red-500 underline'>
               here!

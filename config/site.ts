@@ -2,7 +2,8 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: 'Fly Shop',
-  description: 'Make beautiful websites regardless of your design experience.',
+  description:
+    ' Fly Shop is your go-to online store for the latest and most exclusive streetwear and hypebeast fashion',
   navItems: [
     // {
     //   label: 'Home',
