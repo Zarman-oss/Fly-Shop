@@ -9,12 +9,21 @@ export default async function HomePage() {
 
   const products = inventory.data.map((product) => {
     const price = product.default_price;
+
+    const isPriceObject = (
+      price: any
+    ): price is { currency: string; unit_amount: number } =>
+      typeof price === 'object' &&
+      price !== null &&
+      'currency' in price &&
+      'unit_amount' in price;
+
     return {
-      currency: price.currency,
+      currency: isPriceObject(price) ? price.currency : 'USD',
       id: product.id,
       image: product.images[0],
       name: product.name,
-      price: price.unit_amount,
+      price: isPriceObject(price) ? price.unit_amount : 0,
     };
   });
 

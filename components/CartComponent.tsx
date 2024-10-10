@@ -40,7 +40,9 @@ export default function CartComponent() {
         const { sessionId } = await response.json();
         await redirectToCheckout(sessionId);
       } catch (error) {
-        console.error('Error:', error.message);
+        const errorMessage =
+          error instanceof Error ? error.message : 'An unknown error occurred';
+        console.error('Error:', errorMessage);
       } finally {
         setIsRedirecting(false);
       }

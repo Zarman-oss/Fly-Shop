@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useShoppingCart } from 'use-shopping-cart';
 
-export default function CartProduct({ product }) {
+export default function CartProduct({ product }: any) {
   const { setItemQuantity, removeItem } = useShoppingCart();
 
   return (
